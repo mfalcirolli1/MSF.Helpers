@@ -1,0 +1,38 @@
+{
+  "Timestamp": "2023-01-04T17:12:37.4472439-03:00",
+  "Level": "Information",
+  "MessageTemplate": "App starting up...",
+  "Properties": {
+    "MachineName": "LAPTOP-IV5BVSU7",
+    "ProcessId": 21056,
+    "ThreadId": 1
+  }
+} {
+  "Timestamp": "2023-01-04T17:12:39.9153725-03:00",
+  "Level": "Information",
+  "MessageTemplate": "HTTP {RequestMethod} {RequestPath} responded {StatusCode} in {Elapsed:0.0000} ms",
+  "Properties": {
+    "RequestMethod": "GET",
+    "RequestPath": "/",
+    "StatusCode": 200,
+    "Elapsed": 257.5664,
+    "SourceContext": "Serilog.AspNetCore.RequestLoggingMiddleware",
+    "ActionId": "d80f42b2-639e-4e65-bb18-1716ccc41d10",
+    "ActionName": "/Index",
+    "RequestId": "0HMNEI03GDGB8:00000001",
+    "SpanId": "|a612f9e5-40ccf19de654db2b.",
+    "TraceId": "a612f9e5-40ccf19de654db2b",
+    "ParentId": "",
+    "MachineName": "LAPTOP-IV5BVSU7",
+    "ProcessId": 21056,
+    "ThreadId": 6
+  },
+  "Renderings": {
+    "Elapsed": [
+      {
+        "Format": "0.0000",
+        "Rendering": "257.5664"
+      }
+    ]
+  }
+}

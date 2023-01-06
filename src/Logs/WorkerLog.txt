@@ -1,0 +1,11 @@
+2023-01-06 14:27:13.468 -03:00 [INF] Starting the service...
+2023-01-06 14:27:14.037 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:17.188 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:20.327 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:23.478 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:26.629 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:29.765 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:32.897 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:36.085 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:39.233 -03:00 [INF] Website is up. Status Code: OK
+2023-01-06 14:27:42.380 -03:00 [INF] Website is up. Status Code: OK
