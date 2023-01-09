@@ -39,8 +39,11 @@ namespace MSF.Worker
             {
                 #region Comentarios
 
-                // _logger.LogInformation("Worker running at: {time}", DateTimeOffset.Now);
-                // Console.WriteLine($"{result.StatusCode} - {result.Headers.Date} - {result.RequestMessage.RequestUri}");
+                // Publish de Worker
+                // Open PowerShell as Adm
+                // sc.exe create <ServiceName> binpath=<service.exe_path> start= auto
+                // sc.exe create MSFService1 binpath= C:\Users\Falt_\Documentos\github\Publish\Worker\MSF.Worker.exe start= auto
+                // sc.exe delete MSFService1
 
                 #endregion
 
@@ -48,22 +51,15 @@ namespace MSF.Worker
 
                 if (result.IsSuccessStatusCode)
                 {
-                    _logger.LogInformation($"Website is up. Status Code: {result.StatusCode}");
+                    _logger.LogInformation($"Website is up. Status Code: {result.StatusCode} - {DateTimeOffset.Now}");
                 }
                 else
                 {
-                    _logger.LogError($"Website is down. Status Code: {result.StatusCode}");
+                    _logger.LogError($"Website is down. Status Code: {result.StatusCode} - {DateTimeOffset.Now}");
                 }
 
                 await Task.Delay(3000, stoppingToken);
             }
         }
-
-        // Publish de Worker
-        // Open PowerShell as Adm
-        // sc.exe create <ServiceName> binpath=<service.exe_path> start= auto
-        // sc.exe create MSFService1 binpath= C:\Users\Falt_\Documentos\github\Publish\Worker\MSF.Worker.exe start= auto
-        // sc.exe delete MSFService1
-
     }
 }
