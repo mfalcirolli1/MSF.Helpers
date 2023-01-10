@@ -9,6 +9,6 @@ namespace MSF.Util.Generics
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Address { get; set; }
-
+        public string DataCriacao { get; set; }
     }
 }
