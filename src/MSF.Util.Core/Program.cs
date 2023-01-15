@@ -1,4 +1,5 @@
 ﻿using MSF.Util.Core.FluentEmail;
+using MSF.Util.EPPlus;
 using MSF.Util.Generics;
 using System;
 using System.Collections.Generic;
@@ -33,7 +34,9 @@ namespace MSF.Util.Core
             listObj.Add(obj1); 
             listObj.Add(obj2);
 
-            var teste2 = Generics.Generics.SaveFile<ExModel>(listObj, $"C:\\Users\\Falt_\\Documentos\\github\\Log\\SaveGeneric.csv");
+            // var teste2 = Generics.Generics.SaveFile<ExModel>(listObj, $"C:\\Users\\Falt_\\Documentos\\github\\Log\\SaveGeneric.csv");
+
+            ExcelDemo.CreateExcel();
         }
     }
 }
