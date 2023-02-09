@@ -10,4 +10,8 @@
     <PackageReference Include="Z.ExtensionMethods" Version="2.1.1" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="MapPath\Layout\" />
+  </ItemGroup>
+
 </Project>

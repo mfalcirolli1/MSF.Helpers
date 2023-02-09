@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MSF.Util.EPPlus
 {
@@ -13,11 +14,51 @@ namespace MSF.Util.EPPlus
         public static void CreateExcel()
         {
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
-            var file = new FileInfo(fileName: @"C:\Users\Falt_\Documentos\github\Log\EPPlus.xlsx");
+            var file = new FileInfo(fileName: "C:\\Users\\Falt_\\Documentos\\github\\Log\\EPPlus.xlsx");
 
             var people = GetData();
 
             SaveExcelFile(people, file);
+
+            List<PersonModel> peopleFromExcel = LoadExcelFile(file);
+
+            foreach (var person in peopleFromExcel)
+            {
+                Console.WriteLine($"{person.ID} - {person.Name} - {person.Description}");
+            }
+            Console.ReadLine();
+        }
+
+        private static List<PersonModel> LoadExcelFile(FileInfo file)
+        {
+            var output = new List<PersonModel>();
+
+            if (file.Exists)
+            {
+                using (var pkg = new ExcelPackage(file))
+                {
+                    pkg.LoadAsync(file);
+                    var ws = pkg.Workbook.Worksheets[PositionID: 0];
+
+                    var row = 3;
+                    var column = 1;
+
+                    while (string.IsNullOrWhiteSpace(ws.Cells[row, column].Value?.ToString()) == false)
+                    {
+                        var person = new PersonModel();
+
+                        person.ID = int.Parse(ws.Cells[row, column].Value.ToString());
+                        person.Name = ws.Cells[row, column + 1].Value.ToString();
+                        person.Description = ws.Cells[row, column + 2].Value.ToString();
+
+                        output.Add(person);
+                        row += 1;
+                    }
+                    return output;
+                }
+            }
+
+            return output;
         }
 
         private static void SaveExcelFile(List<PersonModel> people, FileInfo file)
