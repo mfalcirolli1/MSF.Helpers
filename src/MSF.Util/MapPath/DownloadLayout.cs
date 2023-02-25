@@ -8,8 +8,8 @@ namespace MSF.Util.MapPath
     {
         public void Download()
         {
-            // string caminho = Server.MapPath("~/MapPath/Layout/Layout.xlsx");
-            // return File(caminho, "application/vnd.ms-excel", "Arquivo.xlsx");
+            //string caminho = Server.MapPath("~/MapPath/Layout/Layout.xlsx");
+            //return File(caminho, "application/vnd.ms-excel", "Arquivo.xlsx");
         }
     }
 }
