@@ -4,4 +4,8 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MSF.Util\MSF.Util.csproj" />
+  </ItemGroup>
+
 </Project>
