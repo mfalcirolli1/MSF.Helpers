@@ -16,12 +16,17 @@ using System.Text;
 
     channel.ExchangeDeclare(exchangeName, ExchangeType.Direct);
     channel.QueueDeclare(queueName, durable: false, exclusive: false, autoDelete: false, null);
-    channel.QueueBind(queueName, exchangeName, routingKey, null); 
+    channel.QueueBind(queueName, exchangeName, routingKey, null);
 
 #endregion
 
-    byte[] msgBodyBytes = Encoding.UTF8.GetBytes("Hello, World");
-    channel.BasicPublish(exchangeName, routingKey, null, msgBodyBytes);
+    for (int i = 0; i < 60; i++)
+    {
+        Console.WriteLine($"Sending Message {i}...");
+        byte[] msgBodyBytes = Encoding.UTF8.GetBytes($"Message {i}");
+        channel.BasicPublish(exchangeName, routingKey, null, msgBodyBytes);
+        Thread.Sleep(1000);
+    }
 
     channel.Close();
     connection.Close();

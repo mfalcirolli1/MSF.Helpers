@@ -43,9 +43,9 @@ consumer.Received += (sender, args) =>
 
 // Tag of the overall consume system, that can be canceled
 var consumerTag = channel.BasicConsume(queueName, false, consumer);
-channel.BasicCancel(consumerTag);
 
 Console.ReadLine();
 
+channel.BasicCancel(consumerTag);
 channel.Close();
 connection.Close();
