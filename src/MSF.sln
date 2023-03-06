@@ -17,9 +17,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSF.Util.Framework", "MSF.U
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MediatRDemo", "MediatRDemo\MediatRDemo.csproj", "{FF3850E6-1D60-46F8-B2E0-DD342FE1F63C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitSender", "RabbitServer\RabbitSender.csproj", "{7EF273D9-AFA3-4EE7-B634-3CB0E8CA24CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitSender", "RabbitServer\RabbitSender.csproj", "{7EF273D9-AFA3-4EE7-B634-3CB0E8CA24CD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RabbitReceiver", "RabbitReceiver\RabbitReceiver.csproj", "{5AD92937-4FBB-4254-909D-65E8AAF52C93}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitReceiver", "RabbitReceiver\RabbitReceiver.csproj", "{5AD92937-4FBB-4254-909D-65E8AAF52C93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RedisDemo", "RedisDemo\RedisDemo.csproj", "{96773266-9993-40BC-833D-FCCD71712D7B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,6 +65,10 @@ Global
 		{5AD92937-4FBB-4254-909D-65E8AAF52C93}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5AD92937-4FBB-4254-909D-65E8AAF52C93}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5AD92937-4FBB-4254-909D-65E8AAF52C93}.Release|Any CPU.Build.0 = Release|Any CPU
+		{96773266-9993-40BC-833D-FCCD71712D7B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{96773266-9993-40BC-833D-FCCD71712D7B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{96773266-9993-40BC-833D-FCCD71712D7B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{96773266-9993-40BC-833D-FCCD71712D7B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
