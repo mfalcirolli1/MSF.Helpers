@@ -1,7 +1,9 @@
-﻿using RestSharp;
+﻿using Newtonsoft.Json;
+using RestSharp;
 using System;
-using System.Collections.Generic;
+using System.Net.Http;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace MSF.RestSharp.Requests
 {
@@ -22,7 +24,35 @@ namespace MSF.RestSharp.Requests
             var client = new RestClient($"https://viacep.com.br/ws/{cep}/json/");
             var request = new RestRequest("", Method.Get);
             var response = client.Execute(request);
+
             return response;
+        }
+
+        public async Task<TReturn> PostAsync<T, TReturn>(T model, string pathUrl = "")
+        {
+            var httpClient = new HttpClient();
+
+            var stringPayload = JsonConvert.SerializeObject(model);
+            var content = new StringContent(stringPayload, Encoding.UTF8, "application/json");
+            var response = await httpClient.PostAsync("baseURL/" + pathUrl, content);
+
+            // SetStatus(response)
+
+            TReturn returnType = default;
+
+            if (response.Content != null)
+            {
+                try
+                {
+                    returnType = JsonConvert.DeserializeObject<TReturn>(await response.Content.ReadAsStringAsync());
+                }
+                catch (Exception)
+                {
+                }
+            }
+
+            // ReturnType = returnType
+            return returnType;
         }
     }
 }
