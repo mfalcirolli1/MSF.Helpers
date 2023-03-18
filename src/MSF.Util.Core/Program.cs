@@ -3,6 +3,7 @@ using MSF.Util.Core.FluentEmail;
 using MSF.Util.EPPlus;
 using MSF.Util.Generics;
 using MSF.Util.Humanizer;
+using MSF.Util.Markdig;
 using MSF.Util.Singleton_vs_Static;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,10 @@ namespace MSF.Util.Core
         {
 
 
-            //var t = new NonStatic("Nome");
-            //CollectionsDemo.FastestsCollections();
-            HumanizerDemo.Humanize();
+            // var t = new NonStatic("Nome");
+            // CollectionsDemo.FastestsCollections();
+            // HumanizerDemo.Humanize();
+            MardigDemo.StringToHtml();
 
             var esender = new EmailSender();
             // await esender.SendEmail();
