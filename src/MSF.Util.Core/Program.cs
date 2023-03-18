@@ -6,6 +6,7 @@ using MSF.Util.FluentValidation;
 using MSF.Util.Generics;
 using MSF.Util.Humanizer;
 using MSF.Util.Markdig;
+using MSF.Util.Polly;
 using MSF.Util.Singleton_vs_Static;
 using System;
 using System.Collections.Generic;
@@ -17,13 +18,14 @@ namespace MSF.Util.Core
     {
         static async Task Main(string[] args)
         {
+            PollyDemo.PollyTest();
 
             Console.ReadLine();
 
             // var t = new NonStatic("Nome");
             // CollectionsDemo.FastestsCollections();
             // HumanizerDemo.Humanize();
-            // MardigDemo.StringToHtml();
+            // MarkdigDemo.StringToHtml();
             // var bog = BogusDemo.GenerateCustomer();
 
             //var customer = new CustomerModel

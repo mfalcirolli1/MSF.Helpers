@@ -5,7 +5,7 @@ using System.Text;
 
 namespace MSF.Util.Markdig
 {
-    public static class MardigDemo
+    public static class MarkdigDemo
     {
         public static void StringToHtml()
         {
