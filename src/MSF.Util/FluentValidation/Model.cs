@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MSF.Util.FluentValidation
 {
-    internal class Model
+    public class Model
     {
         public string Nome { get; set; }
         public string Telefone { get; set; }

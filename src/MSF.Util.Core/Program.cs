@@ -1,6 +1,7 @@
 ﻿using MSF.Util.Collections;
 using MSF.Util.Core.FluentEmail;
 using MSF.Util.EPPlus;
+using MSF.Util.FluentValidation;
 using MSF.Util.Generics;
 using MSF.Util.Humanizer;
 using MSF.Util.Markdig;
@@ -17,15 +18,27 @@ namespace MSF.Util.Core
         {
 
 
+            Console.ReadLine();
+
             // var t = new NonStatic("Nome");
             // CollectionsDemo.FastestsCollections();
             // HumanizerDemo.Humanize();
-            MardigDemo.StringToHtml();
+            // MardigDemo.StringToHtml();
 
-            var esender = new EmailSender();
+            //var customer = new CustomerModel
+            //{
+            //    ID = 1,
+            //    Name = "Opa",
+            //    Address = "Ruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            //};
+            //var validator = new CustomerValidator();
+            //var result = validator.Validate(customer);
+
+            // var esender = new EmailSender();
             // await esender.SendEmail();
 
             // var teste = Generics.Generics.ReadFile<ExModel>("C:\\Users\\Falt_\\Documentos\\github\\Log\\Generic.txt");
+
 
             var listObj = new List<ExModel>();
             var obj1 = new ExModel

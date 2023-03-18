@@ -6,8 +6,21 @@ using System.Text;
 
 namespace MSF.Util.FluentValidation
 {
-    internal class Validator : AbstractValidator<Model>
+    public class Validator : AbstractValidator<Model>
     {
+        // :: Instanciação da Validação ::
+        //  var customer = new CustomerModel
+        //  {
+        //      ID = 1,
+        //      Name = "Opa",
+        //      Address = "Ruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+        //  };
+        //  var validator = new CustomerValidator();
+        //  var result = validator.Validate(customer);
+
+        /// <summary>
+        /// Exemplo 1
+        /// </summary>
         public Validator()
         {
             RuleFor(x => x.Nome)
@@ -37,5 +50,25 @@ namespace MSF.Util.FluentValidation
         {
             return number.All(Char.IsNumber);
         }
+    }
+
+    /// <summary>
+    /// Exemplo 2
+    /// </summary>
+    public class CustomerValidator : AbstractValidator<CustomerModel>
+    {
+        public CustomerValidator()
+        {
+            RuleFor(x => x.Name).NotEmpty().WithMessage("Please specify a first name");
+            RuleFor(x => x.ID).NotEqual(0).WithMessage("ID Inválido");
+            RuleFor(x => x.Address).Length(20, 250);
+        }
+    }
+
+    public class CustomerModel
+    {
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string Address { get; set; }
     }
 }
