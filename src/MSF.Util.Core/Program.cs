@@ -2,6 +2,7 @@
 using MSF.Util.Core.FluentEmail;
 using MSF.Util.EPPlus;
 using MSF.Util.Generics;
+using MSF.Util.Humanizer;
 using MSF.Util.Singleton_vs_Static;
 using System;
 using System.Collections.Generic;
@@ -13,9 +14,11 @@ namespace MSF.Util.Core
     {
         static async Task Main(string[] args)
         {
-            var t = new NonStatic("Nome");
 
-            CollectionsDemo.FastestsCollections();
+
+            //var t = new NonStatic("Nome");
+            //CollectionsDemo.FastestsCollections();
+            HumanizerDemo.Humanize();
 
             var esender = new EmailSender();
             // await esender.SendEmail();
