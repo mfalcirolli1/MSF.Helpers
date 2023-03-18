@@ -1,4 +1,5 @@
-﻿using MSF.Util.Collections;
+﻿using MSF.Util.Bogus;
+using MSF.Util.Collections;
 using MSF.Util.Core.FluentEmail;
 using MSF.Util.EPPlus;
 using MSF.Util.FluentValidation;
@@ -17,13 +18,13 @@ namespace MSF.Util.Core
         static async Task Main(string[] args)
         {
 
-
             Console.ReadLine();
 
             // var t = new NonStatic("Nome");
             // CollectionsDemo.FastestsCollections();
             // HumanizerDemo.Humanize();
             // MardigDemo.StringToHtml();
+            // var bog = BogusDemo.GenerateCustomer();
 
             //var customer = new CustomerModel
             //{
