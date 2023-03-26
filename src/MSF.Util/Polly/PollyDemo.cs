@@ -16,6 +16,7 @@ namespace MSF.Util.Polly
         {
             var policy = Policy
                 .Handle<AggregateException>()
+                .Or<HttpRequestException>()
                 .Retry(3, (exception, retryCount) =>
                 {
                     Console.WriteLine($"Exception: {exception.Message}. Retry attempt {retryCount}");
