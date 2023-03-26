@@ -13,6 +13,7 @@ using MSF.Util.Singleton_vs_Static;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using MSF.Util.Tasks;
 
 namespace MSF.Util.Core
 {
@@ -20,6 +21,8 @@ namespace MSF.Util.Core
     {
         static async Task Main(string[] args)
         {
+            TaskDemo.Execute();
+
             Console.ReadLine();
 
             // BenchmarkRunner.Run<MapperDemo>();
