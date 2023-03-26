@@ -28,6 +28,9 @@
     <Folder Include="MapPath\Layout\" />
     <Folder Include="MediatRDemo\Commands\" />
     <Folder Include="MediatRDemo\Queries\" />
+    <Folder Include="LazyLoad\" />
+    <Folder Include="Asynchronous\" />
+    <Folder Include="Parallel_ForEach\" />
   </ItemGroup>
 
 </Project>
