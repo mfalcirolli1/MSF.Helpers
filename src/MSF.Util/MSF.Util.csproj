@@ -34,7 +34,6 @@
     <Folder Include="MapPath\Layout\" />
     <Folder Include="MediatRDemo\Commands\" />
     <Folder Include="MediatRDemo\Queries\" />
-    <Folder Include="Asynchronous\" />
   </ItemGroup>
 
 </Project>

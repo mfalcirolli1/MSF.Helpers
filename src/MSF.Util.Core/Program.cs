@@ -15,6 +15,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using MSF.Util.Tasks;
 using MSF.Util.LazyLoad;
+using MSF.Util.Asynchronous;
 
 namespace MSF.Util.Core
 {
@@ -22,10 +23,12 @@ namespace MSF.Util.Core
     {
         static async Task Main(string[] args)
         {
-            var lz = new LazyDemo();
-            lz.Loader(100);
+            HumanizerDemo.Humanize();
             Console.ReadLine();
 
+            //var obj = await AsyncDemo.Executar();
+            //var lz = new LazyDemo();
+            //lz.Loader(100);
             // TaskDemo.Execute();
             // BenchmarkRunner.Run<MapperDemo>();
             // MapsterDemo.FastMaper();
