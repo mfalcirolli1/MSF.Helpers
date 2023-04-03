@@ -34,6 +34,9 @@
     <Folder Include="MapPath\Layout\" />
     <Folder Include="MediatRDemo\Commands\" />
     <Folder Include="MediatRDemo\Queries\" />
+    <Folder Include="JWT\" />
+    <Folder Include="Stream\" />
+    <Folder Include="UnitTests\" />
   </ItemGroup>
 
 </Project>
