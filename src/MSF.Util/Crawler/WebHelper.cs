@@ -8,6 +8,7 @@ using System.IO;
 using System.Web;
 using System.Security.Cryptography.X509Certificates;
 using System.Net.Security;
+using HtmlAgilityPack;
 
 namespace MSF.Util.Crawler
 {
@@ -24,7 +25,10 @@ namespace MSF.Util.Crawler
 
         private bool _usePostFormData = false;
         public HttpWebRequest _request;
+        protected HttpWebResponse _response;
         private string _boundary = "";
+        protected string _responseContent;
+        protected HtmlDocument _document;
 
         #region | Configuração SSL
         public void IniciarConfiguracaoSSL()
@@ -328,9 +332,105 @@ namespace MSF.Util.Crawler
 
         #region | Request
 
+        public void BeginStep(string url, string method)
+        {
+            BeginStep(url, method, false);
+        }
+
+        public void BeginStep(string url, string method, bool usePostFormData)
+        {
+            BeginStep(url, method, String.Empty, usePostFormData);
+        }
+
+        public void BeginStep(string url, string method, string referer)
+        {
+            BeginStep(url, method, referer, false);
+        }
+
+        public void BeginStep(string url, string method, string referer, bool usePostFormData)
+        {
+            _usePostFormData = usePostFormData;
+            _boundary = string.Empty;
+            _request = null;
+            _response = null;
+            _responseContent = string.Empty;
+            _document = null;
+
+            ClearPostParameters();
+            ClearPostParametersDuplicatedKeys();
+            ClearJsonParameters();
+
+            _cookieContainer = new CookieContainer();
+            _cookieContainer.Add(_cookies);
+            CreateRequest(url, method, referer);
+        }
+
+        private void CreateRequest(string url, string method, string referer)
+        {
+            CreateRequest(url, method, referer, false);
+        }
+
+        private void CreateRequest(string url, string method, string referer, bool useProxy)
+        {
+            _request = GetRequest(url, method, referer);
+        }
+
+        private HttpWebRequest GetRequest(string url, string method, string referer)
+        {
+            var request = (HttpWebRequest)HttpWebRequest.Create(url);
+            request.Method = method;
+            request.KeepAlive = true;
+            request.Referer = referer;
+            request.CachePolicy = new System.Net.Cache.HttpRequestCachePolicy(System.Net.Cache.HttpRequestCacheLevel.NoCacheNoStore);
+            request.ReadWriteTimeout = 600000;
+            request.Timeout = 600000;
+
+            if (this._usePostFormData)
+            {
+                request.ContentType = String.Format("multipart/form-data; boundary{0}", boundary);
+                request.AllowWriteStreamBuffering = true;
+            }
+            else
+            {
+                request.ContentType = String.Format("application/x-www-form-urlencoded");
+            }
+
+            request.Accept = "image/gif, image/jpeg, image/pjpeg, image/pjpeg, application/x-shockwave-flash, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/vnd.msword, application/vnd.x-ms-application, application/vnd.x-ms-xbap, application/vnd.ms-xpsdocument, application/xaml+xml, */*";
+            request.UserAgent = "Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1; .NET CLR 1.1.4322; .NET CLR 2.0.50727; .NET CLR 3.0.4506.2152; .NET CLR 3.5.30729; InfoPath.2; .NET4.0E; itx)";
+            request.CookieContainer = _cookieContainer;
+            request.PreAuthenticate = true;
+            request.AllowAutoRedirect = true;
+            request.Headers.Set(HttpRequestHeader.AcceptEncoding, "gzip, deflate");
+
+            return request;
+        }
+
         #endregion
 
         #region | Response
+
+        public HttpWebResponse GetResponseInternal()
+        {
+            if (_response == null)
+            {
+                AddRequestPostParameters(_request);
+                _response = _GetResponseInternal(_request);
+            }
+
+            return _response;
+        }
+
+        private HttpWebResponse _GetResponseInternal(HttpWebRequest request)
+        {
+            var httpResponse = request.GetResponseSafe() as HttpWebResponse;
+            AddCookies(httpResponse.Cookies);
+            return httpResponse;
+        }
+
+        public void EndStep()
+        {
+            GetResponseInternal().Close();
+        }
 
         #endregion
 
@@ -363,6 +463,31 @@ namespace MSF.Util.Crawler
             {
                 c.cookie.Value = c.newValue;
             }
+        }
+
+        #endregion
+
+        #region | Read Response
+
+        public string GetResponseContent()
+        {
+            return _GetResponseContent(GetResponseInternal());
+        }
+
+        private string _GetResponseContent(HttpWebResponse response)
+        {
+            try
+            {
+                if (String.IsNullOrWhiteSpace(_responseContent))
+                {
+                    var reponseStream = response.GetResponseStream();
+                    Stream encondedStream;
+
+                }
+            }
+            catch { }
+
+            return _responseContent;
         }
 
         #endregion
