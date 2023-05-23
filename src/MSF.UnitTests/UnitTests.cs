@@ -1,7 +1,9 @@
+using MSF.Util.AppConfig;
 using MSF.Util.Bogus;
 using MSF.Util.Crawler;
 using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
+using MSF.Util.LazyLoad;
 using System.Diagnostics;
 
 namespace MSF.UnitTests
@@ -9,6 +11,39 @@ namespace MSF.UnitTests
     public class UnitTests : WebHelper
     {
         // [Fact] attribute is used by xUnit in .NET which identifies the method for unit
+
+        [Fact(DisplayName = "App Config Helper - Get & Update")]
+        public void AppConfig()
+        {
+            // Arrange
+
+            // Act
+            var valor1 = AppConfigHelper.GetChaveAppConfig("chave2");
+            AppConfigHelper.UpdateChaveAppConfig("chave2", "novo valor");
+            var valor2 = AppConfigHelper.GetChaveAppConfig("chave2");
+
+
+            // Assert
+            Assert.NotEqual(valor1, valor2);
+        }
+
+
+
+        [Fact(DisplayName = "Lazy Loader")]
+        public void Lazy()
+        {
+            // Arrange
+            var lazy = new LazyDemo();
+
+            // Act
+            lazy.Loader(10);
+
+            // Assert
+            Assert.True(true);
+        }
+
+
+
         [Fact(DisplayName = "JWT - Json Web Token")]
         public void CriarJWT()
         {
@@ -22,12 +57,16 @@ namespace MSF.UnitTests
             Assert.NotNull(token);
         }
 
+
+
         [Fact(DisplayName = "Crawler - Raspagem")]
         public void Raspar()
         {
             BeginStep("", "GET", "");
 
         }
+
+
 
         [Fact(DisplayName = "Bogus - Mock Data")]
         public void Bogus()
@@ -48,6 +87,8 @@ namespace MSF.UnitTests
             }
             Assert.NotNull(customers);
         }
+
+
 
         [Theory(DisplayName = "FluentValidation - Validação")]
         [InlineData(0)]
