@@ -1,3 +1,4 @@
+using HtmlAgilityPack;
 using MSF.Util.AppConfig;
 using MSF.Util.Bogus;
 using MSF.Util.Crawler;
@@ -62,8 +63,15 @@ namespace MSF.UnitTests
         [Fact(DisplayName = "Crawler - Raspagem")]
         public void Raspar()
         {
-            BeginStep("", "GET", "");
+            BeginStep("https://https://www.google.com.br", "GET");
+            var paginaHtml = GetResponseContent();
+            _cookies = _cookieContainer.GetCookies(_request.RequestUri);
+            //var parameters = GetAll
 
+            var docHtml = new HtmlDocument();
+            docHtml.LoadHtml(paginaHtml);
+
+            EndStep();
         }
 
 

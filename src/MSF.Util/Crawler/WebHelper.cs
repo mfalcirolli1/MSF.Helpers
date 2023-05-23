@@ -423,7 +423,7 @@ namespace MSF.Util.Crawler
         private HttpWebResponse _GetResponseInternal(HttpWebRequest request)
         {
             var httpResponse = request.GetResponseSafe() as HttpWebResponse;
-            AddCookies(httpResponse.Cookies);
+            AddCookies(httpResponse?.Cookies);
             return httpResponse;
         }
 
@@ -441,27 +441,30 @@ namespace MSF.Util.Crawler
 
         public void AddCookies(CookieCollection cookies)
         {
-            var newCookies = (from c in cookies.Cast<Cookie>() 
-                              where !_cookies.Cast<Cookie>().Any(c1 => c1.Name == c.Name)
-                              select c).ToList();
-
-            var updateCookies = (from c in cookies.Cast<Cookie>()
-                                 let newCookie = cookies.Cast<Cookie>().FirstOrDefault(c1 => c1.Name == c.Name && c1.Value != c.Value)
-                                 where newCookie != null
-                                 select new 
-                                 { 
-                                     cookie = c,
-                                     newValue = newCookie.Value
-                                 }).ToList();
-
-            foreach (var c in newCookies)
+            if (cookies != null)
             {
-                _cookies.Add(c);
-            }
+                var newCookies = (from c in cookies.Cast<Cookie>()
+                                  where !_cookies.Cast<Cookie>().Any(c1 => c1.Name == c.Name)
+                                  select c).ToList();
 
-            foreach (var c in updateCookies)
-            {
-                c.cookie.Value = c.newValue;
+                var updateCookies = (from c in cookies.Cast<Cookie>()
+                                     let newCookie = cookies.Cast<Cookie>().FirstOrDefault(c1 => c1.Name == c.Name && c1.Value != c.Value)
+                                     where newCookie != null
+                                     select new
+                                     {
+                                         cookie = c,
+                                         newValue = newCookie.Value
+                                     }).ToList();
+
+                foreach (var c in newCookies)
+                {
+                    _cookies.Add(c);
+                }
+
+                foreach (var c in updateCookies)
+                {
+                    c.cookie.Value = c.newValue;
+                }
             }
         }
 
@@ -480,14 +483,68 @@ namespace MSF.Util.Crawler
             {
                 if (String.IsNullOrWhiteSpace(_responseContent))
                 {
-                    var reponseStream = response.GetResponseStream();
-                    Stream encondedStream;
+                    var responseStream = response.GetResponseStream();
+                    Stream encodedStream;
+
+                    if (!string.IsNullOrEmpty(_response.ContentEncoding) && _response.ContentEncoding.ToLower().Contains("gzip"))
+                    {
+                        encodedStream = new GZipStream(responseStream, CompressionMode.Decompress);
+                    }
+                    else if (!string.IsNullOrEmpty(_response.ContentEncoding) && _response.ContentEncoding.ToLower().Contains("deflate"))
+                    {
+                        encodedStream = new DeflateStream(responseStream, CompressionMode.Decompress);
+                    }
+                    else
+                    {
+                        encodedStream = responseStream;
+                    }
+
+                    var responseContentType = response.Headers["Content-Type"].ToString().ToUpper();
+                    Encoding enc;
+
+                    if (responseContentType.Contains("UTF-8"))
+                    {
+                        enc = Encoding.UTF8;
+                    }
+                    else if (responseContentType.Contains("ISO-8859-1"))
+                    {
+                        enc = Encoding.GetEncoding("ISO-8859-1");
+                    }
+                    else
+                    {
+                        enc = Encoding.GetEncoding(1252);
+                    }
+
+                    using (var reader = new StreamReader(encodedStream, enc))
+                    {
+                        _responseContent = reader.ReadToEnd();
+                        reader.Close();
+                    }
 
                 }
             }
             catch { }
 
             return _responseContent;
+        }
+
+        private HtmlDocument _GetResponseContent(string html)
+        {
+            if (_document == null)
+            {
+                _document = new HtmlDocument();
+                _document.Load(html);
+            }
+            return _document;
+        }
+
+        protected string GetAttributesValue(HtmlNode node, string attributeName)
+        {
+            if (node == null || string.IsNullOrWhiteSpace(attributeName) || (!node.Attributes.Contains(attributeName)))
+            {
+                return string.Empty;
+            }
+            return node.Attributes[attributeName].Value;
         }
 
         #endregion
