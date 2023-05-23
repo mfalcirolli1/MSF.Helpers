@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Text;
 using System.Threading;
 
@@ -8,23 +9,21 @@ namespace MSF.Util.LazyLoad
     public class LazyDemo
     {
         public Lazy<PaymentEntity> objPaymentEntity { get; set; }
-        private static bool Key { get; set; }
 
         public LazyDemo()
         {
             objPaymentEntity = new Lazy<PaymentEntity>();
-            Key = false;
         }
 
-        public void Loader(int valor)
+        public void Loader(int valor, bool naoAtivarLazy)
         {
-            if (!Key)
+            if (naoAtivarLazy)
             {
                 var objeto = objPaymentEntity.Value.CriarObjeto(valor);
-                Console.WriteLine($"Objeto criado: {objeto.Id}");
+                Debug.WriteLine($"Objeto criado: {objeto.Id}");
             }
             else
-                Console.WriteLine("Finalizado sem criação");
+                Debug.WriteLine("Finalizado sem criação");
         }
     }
 

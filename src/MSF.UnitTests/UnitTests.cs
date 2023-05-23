@@ -36,7 +36,7 @@ namespace MSF.UnitTests
             var lazy = new LazyDemo();
 
             // Act
-            lazy.Loader(10);
+            lazy.Loader(10, false);
 
             // Assert
             Assert.True(true);
