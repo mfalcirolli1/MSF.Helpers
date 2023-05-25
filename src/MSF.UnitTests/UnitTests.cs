@@ -2,16 +2,46 @@ using HtmlAgilityPack;
 using MSF.Util.AppConfig;
 using MSF.Util.Bogus;
 using MSF.Util.Crawler;
+using MSF.Util.Encrypt;
 using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
 using MSF.Util.LazyLoad;
 using System.Diagnostics;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace MSF.UnitTests
 {
     public class UnitTests : WebHelper
     {
         // [Fact] attribute is used by xUnit in .NET which identifies the method for unit
+
+        [Fact(DisplayName = "AES - Advanced Encryptino Standard")]
+        public void EncyptDecrypt()
+        {
+            // Arrange
+            byte[] chave = new byte[16];
+            byte[] vetorInicializacao = new byte[16];
+
+            using (RandomNumberGenerator rng = RandomNumberGenerator.Create())
+            {
+                rng.GetBytes(chave);
+                rng.GetBytes(vetorInicializacao);
+            }
+
+            // Act
+            var senhaCriptografada = AES.Encrypt("Matheus", chave, vetorInicializacao);
+            var senhaDescriptografada = AES.Decrypt(senhaCriptografada, chave, vetorInicializacao);
+
+            Debug.WriteLine($"Criptografada: {Convert.ToBase64String(senhaCriptografada)} -> {Encoding.UTF8.GetString(senhaCriptografada)}");
+            Debug.WriteLine($"Descriptografada: {senhaDescriptografada}");
+
+            // Assert
+            Assert.NotNull(senhaCriptografada);
+            Assert.NotNull(senhaDescriptografada);
+        }
+
+
 
         [Fact(DisplayName = "App Config Helper - Get & Update")]
         public void AppConfig()
