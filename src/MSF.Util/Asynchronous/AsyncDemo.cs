@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
@@ -21,6 +22,9 @@ namespace MSF.Util.Asynchronous
 
         /* AWAIT - Used with and 'async' method to temporarily suspend its executions and yield contral back to the calling method until the awaited task is completed.
          */
+
+        // A palavra-chave AWAIT passa o controle de execução para o método chamador (anterior)!
+        // Para evitar que o método chamador contínue a execução do código subsequente, é necessário torná-lo assíncrono também!
 
         public async Task<string> FetchDataAsync()
         {
@@ -71,6 +75,18 @@ namespace MSF.Util.Asynchronous
 
                 return results;
             }
+        }
+
+        public async Task<string> Teste()
+        {
+            Debug.WriteLine("Começando a ler...");
+
+            var texto = await ReadFileAsync(@"C:\Users\Falt_\Documentos\Teste.txt");
+
+            Debug.WriteLine($"{texto}");
+            Debug.WriteLine("Terminei de ler...");
+
+            return texto;
         }
     }
 }

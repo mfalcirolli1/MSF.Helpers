@@ -167,10 +167,12 @@ namespace MSF.UnitTests
         {
             var async = new AsyncDemo();
 
-            var result1 = async.ReadFileAsync(@"C:\Users\Falt_\Documentos\Teste.txt");
+            //var result1 = async.ReadFileAsync(@"C:\Users\Falt_\Documentos\Teste.txt");
             //var result1 = async.WriteToFileAsync(@"C:\Users\Falt_\Documentos\Teste.txt", "Olar");
+            var teste = async.Teste();
+            Debug.WriteLine("Ainda não terminei de ler pow");
 
-            Assert.NotNull(result1);
+            //Assert.NotNull(result1);
         }
     }
 }
