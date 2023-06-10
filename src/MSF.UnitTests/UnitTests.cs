@@ -1,7 +1,9 @@
 using HtmlAgilityPack;
 using MSF.Util.AppConfig;
+using MSF.Util.Asynchronous;
 using MSF.Util.Bogus;
 using MSF.Util.Crawler;
+using MSF.Util.Dapper;
 using MSF.Util.Encrypt;
 using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
@@ -148,6 +150,27 @@ namespace MSF.UnitTests
 
             // Assert
             Assert.NotNull(result);
+        }
+
+        [Fact(DisplayName = "Dapper")]
+        public void Dapper()
+        {
+            var dapper = new DapperDemo();
+
+            dapper.Parameters();
+
+            Assert.True(true);
+        }
+
+        [Fact(DisplayName = "Asynchronous")]
+        public void Asynchronous()
+        {
+            var async = new AsyncDemo();
+
+            var result1 = async.ReadFileAsync(@"C:\Users\Falt_\Documentos\Teste.txt");
+            //var result1 = async.WriteToFileAsync(@"C:\Users\Falt_\Documentos\Teste.txt", "Olar");
+
+            Assert.NotNull(result1);
         }
     }
 }

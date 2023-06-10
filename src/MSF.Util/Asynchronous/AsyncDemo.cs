@@ -1,32 +1,76 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace MSF.Util.Asynchronous
 {
-    public static class AsyncDemo
+    public class AsyncDemo
     {
-        public async static Task<string> Executar()
+        // Using 'async await' put tasks in a separated thread, allowing the main thread to remain responsive and handle user interactions.
+
+        /* ASYNC - Used to mark a method as asynchronous. Indicated that the method can perform a non-blocking operation and return a Task or Task<TResult> object
+         *      Cannot be used with contructors and properties
+         *      Must contain at least one 'await' expression
+         *      Can have multiple 'await' expressions
+         */
+
+        /* AWAIT - Used with and 'async' method to temporarily suspend its executions and yield contral back to the calling method until the awaited task is completed.
+         */
+
+        public async Task<string> FetchDataAsync()
         {
-            Console.WriteLine("Faasoida");
+            // Create a new instance of HttpClient
+            using (var httpClient = new HttpClient())
+            {
+                // Use the await keyword to perform a non-blocking GET request
+                string result = await httpClient.GetStringAsync("https://archive.org");
 
-            Console.WriteLine("Faasoisadadasdada");
-
-            var t = await Esperar();
-
-            Console.WriteLine("Faasoida");
-
-            Console.WriteLine("Faasoisadadasdada");
-
-            return t;
+                // Return the result when the request is completed
+                return result;
+            }
         }
 
-        public async static Task<string> Esperar()
+        public async Task<string> ReadFileAsync(string filePath)
         {
-            await Task.Delay(4000);
-            return "Teste";
+            using (var reader = new StreamReader(filePath))
+            {
+                string content = await reader.ReadToEndAsync().ConfigureAwait(false);
+                return content;
+            }
+        }
+
+        public async Task WriteToFileAsync(string filePath, string content)
+        {
+            using (var writer = new StreamWriter(filePath))
+            {
+                await writer.WriteAsync(content);
+            }
+        }
+
+        public async Task CopyFileAsync(string sourcePath, string destinationPath)
+        {
+            using (var sourceStream = File.OpenRead(sourcePath))
+            using (var destinationStream = File.Create(destinationPath))
+            {
+                await sourceStream.CopyToAsync(destinationStream);
+            }
+        }
+
+        public async Task<IEnumerable<string>> FetchMultipleDataAsync(IEnumerable<string> urls)
+        {
+            using (var httpClient = new HttpClient())
+            {
+                var tasks = urls.Select(url => httpClient.GetStringAsync(url));
+
+                string[] results = await Task.WhenAll(tasks);
+
+                return results;
+            }
         }
     }
 }
