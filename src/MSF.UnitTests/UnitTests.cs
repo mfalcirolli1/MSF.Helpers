@@ -1,4 +1,5 @@
 using HtmlAgilityPack;
+using MSF.Util.AggressiveInlining;
 using MSF.Util.AppConfig;
 using MSF.Util.Asynchronous;
 using MSF.Util.Base64;
@@ -197,6 +198,21 @@ namespace MSF.UnitTests
 
             Debug.WriteLine(textoBase64);
             Debug.WriteLine(textoString);
+        }
+
+        [Fact(DisplayName = "Aggressive Inlining")]
+        public void AggressiveInlining()
+        {
+            var list = new List<int>()
+            {
+                1, 2, 3, 4, 5, 6, 7, 8, 9, 10
+            };
+
+            foreach (var item in list)
+            {
+                var agg = Aggressive.Add(item, item + 1);
+                Debug.WriteLine(agg);
+            }
         }
     }
 }
