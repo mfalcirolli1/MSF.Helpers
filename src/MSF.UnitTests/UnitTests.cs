@@ -1,6 +1,7 @@
 using HtmlAgilityPack;
 using MSF.Util.AppConfig;
 using MSF.Util.Asynchronous;
+using MSF.Util.Base64;
 using MSF.Util.Bogus;
 using MSF.Util.Crawler;
 using MSF.Util.Dapper;
@@ -184,6 +185,18 @@ namespace MSF.UnitTests
             dl.GeneralMethod(DelegateDemo.ReferencedMethod);
 
             Assert.True(true);
+        }
+
+        [Fact(DisplayName = "Base64")]
+        public void Base64()
+        {
+            var texto = "Qualquer coisa";
+
+            var textoBase64 = texto.TransformTextToBase64();
+            var textoString = textoBase64.TransformBase64ToText();
+
+            Debug.WriteLine(textoBase64);
+            Debug.WriteLine(textoString);
         }
     }
 }
