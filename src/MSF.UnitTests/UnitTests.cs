@@ -4,6 +4,7 @@ using MSF.Util.Asynchronous;
 using MSF.Util.Bogus;
 using MSF.Util.Crawler;
 using MSF.Util.Dapper;
+using MSF.Util.Delegates;
 using MSF.Util.Encrypt;
 using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
@@ -173,6 +174,16 @@ namespace MSF.UnitTests
             Debug.WriteLine("Ainda não terminei de ler pow");
 
             //Assert.NotNull(result1);
+        }
+
+        [Fact(DisplayName = "Delegate")]
+        public void Delegate()
+        {
+            var dl = new DelegateDemo();
+
+            dl.GeneralMethod(DelegateDemo.ReferencedMethod);
+
+            Assert.True(true);
         }
     }
 }
