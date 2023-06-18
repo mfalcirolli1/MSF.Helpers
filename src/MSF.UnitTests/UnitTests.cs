@@ -3,6 +3,7 @@ using MSF.Util.AggressiveInlining;
 using MSF.Util.AppConfig;
 using MSF.Util.Asynchronous;
 using MSF.Util.Base64;
+using MSF.Util.Binary;
 using MSF.Util.Bogus;
 using MSF.Util.Crawler;
 using MSF.Util.Dapper;
@@ -11,6 +12,7 @@ using MSF.Util.Encrypt;
 using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
 using MSF.Util.LazyLoad;
+using MSF.Util.Security;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
@@ -213,6 +215,28 @@ namespace MSF.UnitTests
                 var agg = Aggressive.Add(item, item + 1);
                 Debug.WriteLine(agg);
             }
+        }
+
+        [Fact(DisplayName = "Security Interview Questions")]
+        public void SecurityInterview()
+        {
+            Security.HashCryptography();
+            Security.SecureStringDemo();
+        }
+
+        [Fact(DisplayName = "Binário | Hexadecimal | Octal")]
+        public void BinárioHexadecimalOctal()
+        {
+            var input = "100";
+
+            Debug.WriteLine($"Texto original: {input}");
+
+            Debug.WriteLine("-----Binário-----");
+            Binary.Binario(input);
+            Debug.WriteLine("-----Octal-----");
+            Binary.Octa(input);
+            Debug.WriteLine("-----Hexadecimal-----");
+            Binary.Hexa(input);
         }
     }
 }
