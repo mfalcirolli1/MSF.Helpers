@@ -13,6 +13,7 @@ using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
 using MSF.Util.LazyLoad;
 using MSF.Util.Security;
+using MSF.Util.StreamDemo;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
@@ -234,9 +235,16 @@ namespace MSF.UnitTests
             Debug.WriteLine("-----Binário-----");
             Binary.Binario(input);
             Debug.WriteLine("-----Octal-----");
-            Binary.Octa(input);
+            Binary.Octal(input);
             Debug.WriteLine("-----Hexadecimal-----");
-            Binary.Hexa(input);
+            Binary.Hexadecimal(input);
+        }
+
+        [Fact(DisplayName = "Stream")]
+        public void Stream()
+        {
+            FileStreamDemo.WriteFile();
+            FileStreamDemo.ReadFile();
         }
     }
 }
