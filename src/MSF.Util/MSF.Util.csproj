@@ -37,7 +37,6 @@
     <Folder Include="MediatRDemo\Commands\" />
     <Folder Include="MediatRDemo\Queries\" />
     <Folder Include="HtmlAgilityPack\" />
-    <Folder Include="Stream\" />
   </ItemGroup>
 
 </Project>

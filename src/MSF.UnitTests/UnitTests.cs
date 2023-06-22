@@ -14,6 +14,7 @@ using MSF.Util.JWT;
 using MSF.Util.LazyLoad;
 using MSF.Util.Security;
 using MSF.Util.StreamDemo;
+using MSF.Util.Tuples;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
@@ -245,6 +246,12 @@ namespace MSF.UnitTests
         {
             FileStreamDemo.WriteFile();
             FileStreamDemo.ReadFile();
+        }
+
+        [Fact(DisplayName = "Tuples")]
+        public void Tuples()
+        {
+            TuplesDemo.DoSomething();
         }
     }
 }
