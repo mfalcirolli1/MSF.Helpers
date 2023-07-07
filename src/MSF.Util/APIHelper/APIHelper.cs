@@ -31,7 +31,7 @@ namespace MSF.Util.APIHelper
                 .WaitAndRetry(2, i => TimeSpan.FromSeconds(10));
         }
 
-        public OperationResult<string> Get(string url, string token, string apiKey = null, string mediaType = "application/json", List<string> listaHeaders = null)
+        public OperationResult<string> Get(string url, string token = null, string apiKey = null, string mediaType = "application/json", List<string> listaHeaders = null)
         {
             var retorno = new OperationResult<string>() { Situation = SituationEnum.Success };
             var response = default(HttpResponseMessage);
@@ -50,7 +50,11 @@ namespace MSF.Util.APIHelper
                 }
 
                 _httpClient.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue(mediaType));
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+
+                if (token.IsNotNullOrEmpty())
+                {
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                }
 
                 RetryPolicy.Execute(() =>
                 {
@@ -70,7 +74,7 @@ namespace MSF.Util.APIHelper
             }
         }
 
-        public OperationResult<string> Post(string url, string item, string token, string apiKey = null, Encoding encoding = null, string mediaType = "application/json", List<string> listaHeaders = null)
+        public OperationResult<string> Post(string url, string item, string token = null, string apiKey = null, Encoding encoding = null, string mediaType = "application/json", List<string> listaHeaders = null)
         {
             var retorno = new OperationResult<string>() { Situation = SituationEnum.Success };
             var response = default(HttpResponseMessage);
@@ -92,7 +96,10 @@ namespace MSF.Util.APIHelper
                     _httpClient.DefaultRequestHeaders.Remove("Authorization");
                 }
 
-                _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                if (token.IsNotNullOrEmpty())
+                {
+                    _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
+                }
 
                 RetryPolicy.Execute(() =>
                 {
@@ -112,11 +119,67 @@ namespace MSF.Util.APIHelper
             }
         }
 
-        // TODO:
         public OperationResult<string> ResponseValidate(HttpResponseMessage response)
         {
             var status = response?.StatusCode;
             var retorno = new OperationResult<string>() { Situation = SituationEnum.Success };
+
+            if (status == HttpStatusCode.BadRequest)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                retorno.ErrorMessage = $"{(int)HttpStatusCode.BadRequest} - {responseData}";
+            }
+            else if (status == HttpStatusCode.NotFound)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                retorno.ErrorMessage = $"{(int)HttpStatusCode.NotFound} - {responseData}";
+            }
+            else if (status == HttpStatusCode.Unauthorized)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                retorno.ErrorMessage = $"{(int)HttpStatusCode.Unauthorized} - {responseData}";
+            }
+            else if (status == HttpStatusCode.RequestTimeout)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                retorno.ErrorMessage = $"{(int)HttpStatusCode.RequestTimeout} - {responseData}";
+            }
+            else if (status == HttpStatusCode.Conflict)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                retorno.ErrorMessage = $"{(int)HttpStatusCode.Conflict} - {responseData}";
+            }
+            else if (status == HttpStatusCode.GatewayTimeout)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                retorno.ErrorMessage = $"{(int)HttpStatusCode.GatewayTimeout} - {responseData}";
+            }
+            else if (status == HttpStatusCode.InternalServerError)
+            {
+                var responseData = response.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                retorno.ErrorMessage = $"{(int)HttpStatusCode.InternalServerError} - {responseData}";
+            }
+            else if (status != HttpStatusCode.Accepted && status != HttpStatusCode.OK && status != HttpStatusCode.NoContent && status != HttpStatusCode.Created)
+            {
+                var responseData = response?.Content.ReadAsStringAsync().Result;
+                retorno.Situation = SituationEnum.Warning;
+                if (string.IsNullOrWhiteSpace(responseData) == false)
+                    retorno.ErrorMessage = $"000 - {responseData}";
+                else
+                    retorno.ErrorMessage = "000 - The HTTP status code of the response was not expected";
+            }
+
+            if (response != null && response.Content != null)
+            {
+                retorno.Data = response.Content.ReadAsStringAsync().Result;
+            }
 
             return retorno;
         }
