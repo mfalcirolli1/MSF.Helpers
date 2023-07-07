@@ -37,6 +37,7 @@
     <Folder Include="MediatRDemo\Commands\" />
     <Folder Include="MediatRDemo\Queries\" />
     <Folder Include="HtmlAgilityPack\" />
+    <Folder Include="APIHelper\" />
   </ItemGroup>
 
 </Project>

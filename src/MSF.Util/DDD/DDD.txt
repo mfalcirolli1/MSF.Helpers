@@ -1,0 +1,67 @@
+﻿Domain-Driven Design
+
+É uma maneira de pensar e um conjunto de propriedades
+Voltado para a aceleração de projetos de software que têm que trabalhar com domínios complexos
+Objetivo: Facilitar a implementação de regras complexas (processos de negócio que tratamos como domínio)
+
+DDD NÃO É: 
+	Arquitetura; 
+	Tecnologia; 
+	Framework; 
+	Padrão; 
+	Linguagem;
+
+NÃO FAZ SENTIDO:
+	Como implementar o padrão DDD?
+	Qual framework DDD devo usar?
+	Como fazer um crud usando DDD?
+
+QUANDO NÃO USAR DDD:
+	Gerenciar melhor os dados;
+	Aumentar o desempenho da aplicação;
+	Ajudar na complexidade da tecnologia usada no projeto;
+
+QUANDO CONSIDERAR O DDD:
+	Resolver problemas na complexidade do negócio;
+	Projetos onde a complexidade da lógica de negócio justificar a sua adoção;
+
+BEEFÍCIOS:
+	Comunicação (linguagem ubíqua);
+	Código coeso;
+	Compreensão de negócio;
+	Enfatiza o domínio do negócio;
+
+QUANDO IMPLEMENTAR?
+	Se seu Projeto… Assim, digamos que, 
+	em algum lugar no intervalo entre 30 e 40 histórias de usuário ou fluxos de caso de uso, 
+	a complexidade poderia ser pior. Seu sistema pode estar entrando no território do DDD.
+
+	Se seu Projeto… Os recursos da aplicação serão alterados com frequência ao longo de alguns anos, 
+	e você não pode antecipar que as alterações serão simples.
+
+Ubiquitous Language:
+	Vocabulário de termos específicos de domínio. (Substantivos, verbos, adjetivos etc.)
+	Compartilhado por todas as partes envolidas no projeto.
+	Usado em todas as formas de comunicação falada e escrita.
+
+	Linguagem onipresente, usado em todos os lugares: histórias, reuniões, e-mails, código fonte, documentação, planejamento...
+
+	Objetivo principal: Evitar mal-entendidos
+
+	Por que?
+		Pessoas usam termos diferentes para as mesmas coisas; (Pessoas de negócios têm uma cabeça “diferente” das de desenvolvedores)
+		Ajuda a ter uma terminologia comum;
+		Ajuda a entender os requisitor do usuário de forma clara.
+
+		Foco Operacional
+			Pensamento em produto e processo;
+			Prazo, entrega;
+			"O que?"
+
+		Foco em Tecnologia
+			Pensamento focado em tecnologia e desenvolvimento;
+			Padrões, qualidade;
+			"Como?"
+	
+BOUNDED CONTEXT:
+	
