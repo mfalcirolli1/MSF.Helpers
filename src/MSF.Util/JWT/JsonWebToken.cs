@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
 using System.Security.Claims;
 using System.Text;
 
@@ -37,6 +38,14 @@ namespace MSF.Util.JWT
             Debug.WriteLine($"Token: {tokenString}");
 
             return tokenString;
+        }
+
+        public static void ReadJWT(string token)
+        {
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var jwtToken = tokenHandler.ReadJwtToken(token);
+
+            var item = jwtToken.Claims.Where(m => m.Type == "claim_key").FirstOrDefault().Value;
         }
     }
 }
