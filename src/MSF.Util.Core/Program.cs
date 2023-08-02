@@ -16,6 +16,7 @@ using System.Threading.Tasks;
 using MSF.Util.Tasks;
 using MSF.Util.LazyLoad;
 using MSF.Util.Asynchronous;
+using MSF.Util.SecurePassword;
 
 namespace MSF.Util.Core
 {
@@ -23,8 +24,9 @@ namespace MSF.Util.Core
     {
         static async Task Main(string[] args)
         {
-            HumanizerDemo.Humanize();
-            Console.ReadLine();
+            SecurePasswordDemo.Teste();
+            //HumanizerDemo.Humanize();
+            //Console.ReadLine();
 
             //var obj = await AsyncDemo.Executar();
             //var lz = new LazyDemo();
