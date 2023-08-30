@@ -8,6 +8,7 @@ using MSF.Util.Bogus;
 using MSF.Util.Crawler;
 using MSF.Util.Dapper;
 using MSF.Util.Delegates;
+using MSF.Util.DesignPatterns.Singleton;
 using MSF.Util.Encrypt;
 using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
@@ -252,6 +253,15 @@ namespace MSF.UnitTests
         public void Tuples()
         {
             TuplesDemo.DoSomething();
+        }
+
+        [Fact(DisplayName = "Singleton")]
+        public void Singleton()
+        {
+            var obj = new SingletonDemo();
+            var sgt = obj.SingleInstance;
+
+            Assert.NotNull(sgt);
         }
     }
 }
