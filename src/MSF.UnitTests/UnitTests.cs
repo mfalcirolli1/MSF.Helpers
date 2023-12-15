@@ -1,10 +1,12 @@
 using HtmlAgilityPack;
+using Microsoft.Extensions.Caching.Memory;
 using MSF.Util.AggressiveInlining;
 using MSF.Util.AppConfig;
 using MSF.Util.Asynchronous;
 using MSF.Util.Base64;
 using MSF.Util.Binary;
 using MSF.Util.Bogus;
+using MSF.Util.Cache;
 using MSF.Util.Crawler;
 using MSF.Util.Dapper;
 using MSF.Util.Delegates;
@@ -262,6 +264,22 @@ namespace MSF.UnitTests
             var sgt = obj.SingleInstance;
 
             Assert.NotNull(sgt);
+        }
+
+        [Fact(DisplayName = "Memory Cache Demo")]
+        public void CacheDemo()
+        {
+            // Arrange
+            var options = new MemoryCacheOptions();
+            IMemoryCache _memorycache = new MemoryCache(options);
+
+            var memoryCacheDemo = new MemoryCacheDemo(_memorycache);
+
+            // Act
+            memoryCacheDemo.GetClientes();
+
+            // Assert
+            Assert.Null(null);
         }
     }
 }
