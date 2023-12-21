@@ -18,6 +18,7 @@ using MSF.Util.LazyLoad;
 using MSF.Util.Security;
 using MSF.Util.StreamDemo;
 using MSF.Util.Tuples;
+using MSF.Util.WireMock;
 using System.Diagnostics;
 using System.Security.Cryptography;
 using System.Text;
@@ -152,11 +153,20 @@ namespace MSF.UnitTests
                 Name = "Opa",
                 Address = "Ruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
             };
+
             var validator = new CustomerValidator();
 
             // Act
             var result = validator.Validate(customer);
-            Debug.WriteLine($"Válido: {result.IsValid}\n Mensagem: {result.Errors.FirstOrDefault()}");
+
+            if (result.Errors.Any())
+            {
+                Debug.WriteLine($"Válido: {result.IsValid}\nMensagem: {result.Errors.FirstOrDefault()} = {customer.ID}");
+                return;
+            }
+
+            Debug.WriteLine($"Objeto válido: {result.IsValid}");
+
 
             // Assert
             Assert.NotNull(result);
@@ -280,6 +290,19 @@ namespace MSF.UnitTests
 
             // Assert
             Assert.Null(null);
+        }
+
+        [Fact(DisplayName = "Wire Mock - Mocking")]
+        public void WireMockTest()
+        {
+            // Arrange
+
+
+            // Act
+            var response = WireMockDemo.APICall();
+
+            // Assert
+            Assert.NotNull(response);
         }
     }
 }
