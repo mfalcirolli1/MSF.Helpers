@@ -36,9 +36,18 @@ namespace MSF.Util.WireMock
                 .WithHeader("Content-Type", "application/json")
                 .WithBodyAsJson(new WireMockModel { Id = 0, Name = "Matheus" }));
 
+            server.Given(Request.Create()
+                .WithPath("/home/posttest")
+                .UsingPost())
+                .RespondWith(Response.Create()
+                .WithStatusCode(200)
+                .WithHeader("Content-Type", "application/json")
+                .WithBodyAsJson(new WireMockModel { Id = 0, Name = "Post Test", PhoneNumber = "(11) 99999-9999",
+                    Address = new Address() { CEP = "00000-00", City = "Guarulhos", Country = "Brazil", Number = "110", Reference = "Não há", State = "SP", Street = "Rua rua" } }));
+
             Debug.WriteLine(log.ToString());
 
-            Thread.Sleep(30000);
+            Thread.Sleep(300000);
 
             server.Stop();
 
