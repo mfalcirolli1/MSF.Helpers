@@ -1,0 +1,29 @@
+﻿:: Transient ::
+
+	- Definição: 
+		Uma nova instância do serviço é criada cada vez que é solicitado. 
+		Isso significa que cada vez que uma classe ou componente dependente pede uma instância do serviço, uma nova instância é fornecida.
+
+	- Uso Típico: 
+		Normalmente utilizado para serviços leves e de curta duração, nos quais uma nova instância a cada solicitação não gera impactos negativos.
+
+:: Scoped ::
+
+	- Definição: 
+		Uma instância por solicitação (ou escopo). 
+		Isso significa que durante a execução de uma solicitação HTTP em um aplicativo da web, por exemplo, uma única instância do serviço será usada. 
+		Quando a próxima solicitação chegar, uma nova instância será criada.
+
+	- Uso Típico: 
+		Útil em cenários de aplicativos da web onde você deseja que um serviço mantenha seu estado durante toda a solicitação, 
+		mas não quer que o mesmo estado seja compartilhado entre solicitações diferentes.
+
+:: Singleton ::
+
+	- Definição: 
+		Uma única instância do serviço é criada e usada durante toda a vida da aplicação. 
+		Independentemente de quantas vezes o serviço é solicitado, a mesma instância é retornada.
+
+	- Uso Típico: 
+		Ideal para serviços que são caros em termos de recursos e cujo estado é compartilhado globalmente. 
+		Pode ser problemático se o serviço mantiver um estado mutável, pois esse estado será compartilhado entre todos os usuários da aplicação.
