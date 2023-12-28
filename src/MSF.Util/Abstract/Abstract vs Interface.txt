@@ -1,0 +1,12 @@
+﻿
+Abstract
+
+	1. É uma classe que não pode ser instanciada diretamente;
+	2. Fornece implementações parciais;
+
+Interface
+
+	1. É uma coleção de métodos e propriedades sem implementação;
+	2. Fornece apenas a assinatura dos métodos e propriedades, sem nenhuma implementação;
+
+*** Uma classe pode herdar de apenas uma classe abstrata, mas pode implementar várias interfaces. ***
