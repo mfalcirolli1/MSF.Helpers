@@ -1,22 +1,4 @@
-﻿using BenchmarkDotNet.Running;
-using MSF.Util.Bogus;
-using MSF.Util.Collections;
-using MSF.Util.Core.FluentEmail;
-using MSF.Util.EPPlus;
-using MSF.Util.FluentValidation;
-using MSF.Util.Generics;
-using MSF.Util.Humanizer;
-using MSF.Util.Mapper;
-using MSF.Util.Markdig;
-using MSF.Util.Polly;
-using MSF.Util.Singleton_vs_Static;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using MSF.Util.Tasks;
-using MSF.Util.LazyLoad;
-using MSF.Util.Asynchronous;
-using MSF.Util.SecurePassword;
+﻿using System;
 using MSF.ChatGPT.ChatGPT;
 using MSF.Util.Base64;
 
@@ -33,7 +15,6 @@ namespace MSF.Util.Core
 
             while (true)
             {
-
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.Write("You: ");
                 Console.ResetColor();
