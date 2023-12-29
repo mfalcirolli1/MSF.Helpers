@@ -17,66 +17,42 @@ using MSF.Util.Tasks;
 using MSF.Util.LazyLoad;
 using MSF.Util.Asynchronous;
 using MSF.Util.SecurePassword;
+using MSF.ChatGPT.ChatGPT;
 
 namespace MSF.Util.Core
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            SecurePasswordDemo.Teste();
-            //HumanizerDemo.Humanize();
-            //Console.ReadLine();
 
-            //var obj = await AsyncDemo.Executar();
-            //var lz = new LazyDemo();
-            //lz.Loader(100);
-            // TaskDemo.Execute();
-            // BenchmarkRunner.Run<MapperDemo>();
-            // MapsterDemo.FastMaper();
-            // PollyDemo.PollyTest();
-            // var t = new NonStatic("Nome");
-            // CollectionsDemo.FastestsCollections();
-            // HumanizerDemo.Humanize();
-            // MarkdigDemo.StringToHtml();
-            // var bog = BogusDemo.GenerateCustomer();
+            string apiKey = "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";
+            var chatGPTClient = new ChatGPTClient(apiKey);
 
-            //var customer = new CustomerModel
-            //{
-            //    ID = 1,
-            //    Name = "Opa",
-            //    Address = "Ruaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
-            //};
-            //var validator = new CustomerValidator();
-            //var result = validator.Validate(customer);
+            Console.WriteLine("Welcome to the ChatGPT chatbot! Type 'exit' to quit.");
 
-            // var esender = new EmailSender();
-            // await esender.SendEmail();
+            while (true)
+            {
 
-            // var teste = Generics.Generics.ReadFile<ExModel>("C:\\Users\\Falt_\\Documentos\\github\\Log\\Generic.txt");
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.Write("You: ");
+                Console.ResetColor();
+                string input = Console.ReadLine() ?? string.Empty;
 
+                if (input.ToLower() == "exit")
+                    break;
 
-            //var listObj = new List<ExModel>();
-            //var obj1 = new ExModel
-            //{
-            //    Address = "Favela 1",
-            //    FirstName = "Baile 1",
-            //    LastName = "De 1",
-            //    DataCriacao = DateTime.Today.ToString("dd/MM/yyyy")
-            //};
-            //var obj2 = new ExModel
-            //{
-            //    Address = "Favela 2",
-            //    FirstName = "Baile 2",
-            //    LastName = "De 2",
-            //    DataCriacao = DateTime.Today.ToString("dd/MM/yyyy")
-            //};
-            //listObj.Add(obj1); 
-            //listObj.Add(obj2);
+                string response = chatGPTClient.SendMessage(input);
 
-            // var teste2 = Generics.Generics.SaveFile<ExModel>(listObj, $"C:\\Users\\Falt_\\Documentos\\github\\Log\\SaveGeneric.csv");
+                Console.ForegroundColor = ConsoleColor.Blue;
+                Console.Write("Chatbot: ");
+                Console.ResetColor();
+                Console.WriteLine(response);
 
-            // ExcelDemo.CreateExcel();
+                Console.WriteLine();
+                Console.WriteLine("------------------------------------------------");
+                Console.WriteLine();
+            }
         }
     }
 }
