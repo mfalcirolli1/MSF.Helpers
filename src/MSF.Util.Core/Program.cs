@@ -18,6 +18,7 @@ using MSF.Util.LazyLoad;
 using MSF.Util.Asynchronous;
 using MSF.Util.SecurePassword;
 using MSF.ChatGPT.ChatGPT;
+using MSF.Util.Base64;
 
 namespace MSF.Util.Core
 {
@@ -25,8 +26,7 @@ namespace MSF.Util.Core
     {
         static void Main(string[] args)
         {
-
-            string apiKey = "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";
+            string apiKey = Base64Extension.TransformBase64ToText("c2stMGxxVno2dmpRYmNtZ3BES0FmRW9UM0JsYmtGSlJES2FzN3g3WWRsWkQxeHduN2Z3");
             var chatGPTClient = new ChatGPTClient(apiKey);
 
             Console.WriteLine("Welcome to the ChatGPT chatbot! Type 'exit' to quit.");
