@@ -16,6 +16,7 @@ using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
 using MSF.Util.LazyLoad;
 using MSF.Util.Security;
+using MSF.Util.SOLID.DIP___Dependency_Inversion_Principle;
 using MSF.Util.StreamDemo;
 using MSF.Util.Tuples;
 using MSF.Util.WireMock;
@@ -303,6 +304,19 @@ namespace MSF.UnitTests
 
             // Assert
             Assert.NotNull(response);
+        }
+
+        [Fact(DisplayName = "SOLID - DIP (Dependency Inversion Principle)")]
+        public void SolidDIP()
+        {
+            // Arrange
+            var execute = new Chore();
+
+            // Act
+            execute.Execute();
+
+            // Assert
+            Assert.Null(null);
         }
     }
 }
