@@ -2,7 +2,7 @@
 
 namespace MSF.Util.SOLID.DIP___Dependency_Inversion_Principle
 {
-    public class Logger
+    public class Logger : ILogger
     {
         public void Log(string message)
         {

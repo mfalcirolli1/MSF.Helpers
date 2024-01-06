@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MSF.Util.SOLID.DIP___Dependency_Inversion_Principle
 {
-    public class Person
+    public class Person : IPerson
     {
         public string FirstName { get; set; }
         public string LastName { get; set; }

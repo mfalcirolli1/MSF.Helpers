@@ -1,5 +1,6 @@
 using HtmlAgilityPack;
 using Microsoft.Extensions.Caching.Memory;
+using MSF.UnitTests.DIP;
 using MSF.Util.AggressiveInlining;
 using MSF.Util.AppConfig;
 using MSF.Util.Asynchronous;
@@ -107,13 +108,17 @@ namespace MSF.UnitTests
         [Fact(DisplayName = "Crawler - Raspagem")]
         public void Raspar()
         {
-            BeginStep("https://https://www.google.com.br", "GET");
+            BeginStep("https://github.com/", "GET");
             var paginaHtml = GetResponseContent();
             _cookies = _cookieContainer.GetCookies(_request.RequestUri);
-            //var parameters = GetAll
+
+            BeginStep("https://github.com/login", "GET", "https://github.com/");
+            var paginaHtmlLogin = GetResponseContent();
+            _cookies = _cookieContainer.GetCookies(_request.RequestUri);
 
             var docHtml = new HtmlDocument();
             docHtml.LoadHtml(paginaHtml);
+            docHtml.LoadHtml(paginaHtmlLogin);
 
             EndStep();
         }
@@ -310,10 +315,10 @@ namespace MSF.UnitTests
         public void SolidDIP()
         {
             // Arrange
-            var execute = new Chore();
+            var program = new ProgramDemo();
 
             // Act
-            execute.Execute();
+            program.Execute();
 
             // Assert
             Assert.Null(null);

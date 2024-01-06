@@ -2,9 +2,9 @@
 
 namespace MSF.Util.SOLID.DIP___Dependency_Inversion_Principle
 {
-    public class Emailer
+    public class Emailer : IMessageSender
     {
-        public void SendEmail(Person person, string message)
+        public void SendMessage(IPerson person, string message)
         {
             Debug.WriteLine($"Sending email to: {person.EmailAddress}");
         }
