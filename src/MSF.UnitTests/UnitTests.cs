@@ -13,6 +13,7 @@ using MSF.Util.Dapper;
 using MSF.Util.Delegates;
 using MSF.Util.DesignPatterns.Singleton;
 using MSF.Util.Encrypt;
+using MSF.Util.FileSystem;
 using MSF.Util.FluentValidation;
 using MSF.Util.JWT;
 using MSF.Util.LazyLoad;
@@ -319,6 +320,19 @@ namespace MSF.UnitTests
 
             // Act
             program.Execute();
+
+            // Assert
+            Assert.Null(null);
+        }
+
+        [Fact(DisplayName = "File Stream")]
+        public void FileStreamD()
+        {
+            // Arranges
+            var program = new FileDemo();
+
+            // Act
+            program.ReadFile();
 
             // Assert
             Assert.Null(null);

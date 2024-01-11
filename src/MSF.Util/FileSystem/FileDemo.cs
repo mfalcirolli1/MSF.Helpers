@@ -5,8 +5,46 @@ using System.Text;
 
 namespace MSF.Util.FileSystem
 {
-    internal class FileDemo
+    public class FileDemo
     {
+        public Dictionary<string, string> ReadFile()
+        {
+            var caminho = "C:\\Users\\Falt_\\Documentos\\github\\Log\\SaveGeneric.txt";
+            var retornos = new Dictionary<string, string>();
+
+            if (!System.IO.File.Exists(caminho))
+            {
+                Console.WriteLine($"O arquivo não foi encontrado: {caminho}");
+            }
+
+            byte[] array;
+
+            using (FileStream fs = System.IO.File.OpenRead(caminho))
+            {
+                array = new byte[fs.Length];
+
+                using (BinaryReader binaryReader = new BinaryReader(fs))
+                {
+                    array = binaryReader.ReadBytes((int)fs.Length);
+                }
+                
+                var arrayToBase64 = Convert.ToBase64String(array);
+                var arrayToString = Encoding.UTF8.GetString(array);
+                retornos.Add("Retorno 1", arrayToString);
+            }
+
+            using (FileStream fs = new FileStream(caminho, FileMode.Open, FileAccess.Read))
+            {
+                using (StreamReader leitor = new StreamReader(fs, Encoding.UTF8))
+                {
+                    var conteudo = leitor.ReadToEnd();
+                    retornos.Add("Retorno 2", conteudo);
+                }
+            }
+
+            return retornos;
+        }
+
         public static void File()
         {
             string rootPath = @"C:\Users\Falt_\Documentos\I AM TIM COREY - Youtube Course\10. FileSystemDemo\Files";
